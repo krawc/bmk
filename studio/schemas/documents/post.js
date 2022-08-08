@@ -51,6 +51,12 @@ export default {
       ],
     },
     {
+      name: "videoLink",
+      type: "string",
+      title: "Video Link",
+      description: "Embeds automatically",
+    },
+    {
       name: "categories",
       type: "array",
       title: "Categories",
