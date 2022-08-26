@@ -60,7 +60,9 @@
   max-height: 40vh;
   opacity: 0.8;
   transition: opacity 0.2s ease-in-out;
-
+  @media (max-width: 768px) {
+    width: 100%;
+  }
   &:hover {
     opacity: 1;
   }
@@ -92,6 +94,11 @@
   font-style: italic;
   transform: translateX(70px);
   margin-top: 2em!important;
+  @media (max-width: 768px) {
+    transform: translateX(20px);
+    font-size: 20px;
+    width: 100%;
+  }
   &::before {
     content: "";
     position:absolute;

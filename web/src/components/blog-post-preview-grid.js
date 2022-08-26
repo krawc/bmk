@@ -4,17 +4,45 @@ import BlogPostPreviewVideo from "./blog-post-preview-video";
 import BlogPostPreviewPublication from "./blog-post-preview-publication";
 
 import { Link } from "gatsby";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import HorizontalScroll from './scroller'
 import DOM from 'react-dom'
-import {useWindowDimensions} from '../lib/helpers'
+import Carousel from 'react-multi-carousel'
+import 'react-multi-carousel/lib/styles.css'
+
+import window from 'global'
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions;
+}
 
 function BlogPostPreviewGrid(props) {
 
   const refsc = useRef();
   const [scroll, setScroll] = useState(0);
-  const [width, setWidth] = useState(1);
+  const [w, setW] = useState(1);
   const [mode, setMode] = useState('essays');
+
+  const { height, width } = useWindowDimensions();
 
   const handleScroll = num => {
     // 👇️ take parameter passed from Child component
@@ -23,12 +51,15 @@ function BlogPostPreviewGrid(props) {
 
   const handleWidth = num => {
     // 👇️ take parameter passed from Child component
-    setWidth(num);
+    setW(num);
   };
 
   return (
     <div className={styles.root}> 
-      <HorizontalScroll style={{height: 'calc(100vh - 73px)'}} handleScroll={handleScroll} handleWidth={handleWidth}>
+
+
+      {width > 768 ? 
+        <HorizontalScroll style={{height: 'calc(100vh - 73px)'}} handleScroll={handleScroll} handleWidth={handleWidth}>
         {props.nodes &&
           props.nodes.map((node) => {
             if (node.categories && node.categories.length !== 0 && node.categories[0].title === 'Videos') {
@@ -45,9 +76,77 @@ function BlogPostPreviewGrid(props) {
             <BlogPostPreview {...node} />
             )
           })}
-      </HorizontalScroll>
+        </HorizontalScroll>
+        :
+        <Carousel
+        additionalTransfrom={0}
+        arrows
+        centerMode={false}
+        className=""
+        containerClass="container-with-dots"
+        dotListClass=""
+        draggable
+        focusOnSelect={false}
+        infinite
+        itemClass=""
+        keyBoardControl
+        minimumTouchDrag={80}
+        renderButtonGroupOutside={false}
+        renderDotsOutside={false}
+        responsive={{
+          desktop: {
+            breakpoint: {
+              max: 3000,
+              min: 1024
+            },
+            items: 5,
+            partialVisibilityGutter: 40
+          },
+          mobile: {
+            breakpoint: {
+              max: 464,
+              min: 0
+            },
+            items: 1,
+            partialVisibilityGutter: 30
+          },
+          tablet: {
+            breakpoint: {
+              max: 1024,
+              min: 464
+            },
+            items: 1,
+            partialVisibilityGutter: 30
+          }
+        }}
+        showDots={false}
+        sliderClass=""
+        slidesToSlide={1}
+        swipeable
+        transitionDuration={1000}
+      >
+          {props.nodes &&
+            props.nodes.map((node) => {
+              if (node.categories && node.categories.length !== 0 && node.categories[0].title === 'Videos') {
+                return(
+                  <BlogPostPreviewVideo {...node} />
+                )
+              }
+              if (node.categories && node.categories.length !== 0 && node.categories[0].title === 'Publications') {
+                return(
+                  <BlogPostPreviewPublication {...node} />
+                )
+              }
+              return(
+              <BlogPostPreview {...node} />
+              )
+            })}
+      </Carousel>
+      }
+
+
       <div className={styles.scrollBar}>
-        <div className={styles.wheel} style={{left: 'calc(' + ((Math.abs(scroll) / width) * 90) + '% + 5%)'}}></div>
+        <div className={styles.wheel} style={{left: 'calc(' + ((Math.abs(scroll) / w) * 90) + '% + 5%)'}}></div>
       </div>
       <div className={styles.overlay}></div>
         <ul className={styles.subMenu}>
