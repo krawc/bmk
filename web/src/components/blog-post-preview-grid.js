@@ -31,7 +31,6 @@ function BlogPostPreviewGrid(props) {
       <HorizontalScroll style={{height: 'calc(100vh - 73px)'}} handleScroll={handleScroll} handleWidth={handleWidth}>
         {props.nodes &&
           props.nodes.map((node) => {
-            console.log(node.categories[0].title === 'Videos')
             if (node.categories && node.categories.length !== 0 && node.categories[0].title === 'Videos') {
               return(
                 <BlogPostPreviewVideo {...node} />
