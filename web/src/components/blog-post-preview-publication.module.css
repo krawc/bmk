@@ -38,6 +38,12 @@
 
   }
 
+  @media (max-width: 768px) {
+    margin-top: 10vh!important;
+    width: 90vw!important;
+  }
+  
+
   margin: 0 15vh;
   font-family: var(--font-family-monospace);
   font-weight: 100;
@@ -56,6 +62,7 @@
   transition: opacity 0.2s ease-in-out;
   z-index: 10;
   position: relative;
+
   &:hover {
     opacity: 1;
   }
@@ -89,6 +96,7 @@
   transform: translateX(40px);
   margin-top: 1em!important;
   max-width: 400px;
+  
   &::before {
     content: "";
     position: absolute;
