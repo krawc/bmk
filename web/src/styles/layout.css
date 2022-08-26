@@ -6,14 +6,125 @@ html {
 
 body {
   -webkit-font-smoothing: antialiased;
-  background: var(--color-white);
-  color: var(--color-black);
+  background: var(--color-black);
+  color: var(--color-white);
   margin: 0;
+  min-height: 100vh;
 }
 
 html,
 body,
 body > div,
 body > div > div {
-  height: 100%;
+  width: 100vw;
+}
+
+#gatsby-focus-wrapper {
+  background-image: url("../assets/bg.gif");
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(to right, #0f0, #0f0 );
+  &::before {
+    content: "";
+    display: block;
+    position: fixed;
+    min-width: 150vw;
+    min-height: 180vw;
+    width: 150vw;
+    height: 150vw;
+    background-image: url("../assets/fg.svg");
+    background-position: 0 0;
+    animation: dvd 20s infinite;
+    transform: translate(-50vw, -75vw);
+  }
+}
+
+@keyframes dvd {
+  0% {
+    transform: translate(-50vw, -75vw);
+  }
+  25% {
+    transform: translate(-25vw, -75vw);
+  }
+  50% {
+    transform: translate(-50vw, -50vw);
+  }
+  75% {
+    transform: translate(-25vw, -50vw);
+  }
+  100% {
+    transform: translate(-50vw, -75vw);
+  }
+}
+
+a {
+  color: #fff;
+}
+
+
+.main {
+  width: 100%;
+  min-height: calc(100vw - 50px);
+  position: relative;
+  top: 29px;
+  
+  padding: 0;
+}
+
+.content {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  top: 0;
+  padding-top: 20px;
+}
+
+.card-img-container {
+  text-align: center;
+  line-height: 150px;
+  min-height: 40vh;
+}
+
+.card-img-text {
+  color: #bbb;
+  text-transform: uppercase;
+}
+
+
+.card-title-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 5px;
+  font-style: italic;
+}
+
+.card-title {
+  font-weight: bold;
+  text-transform: capitalize;
+  font-size: 1.5em;
+  white-space: pre-wrap;
+
+}
+
+.card-subtitle {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.card-info-container {
+  padding: 5px;
+}
+
+.icon-container__horizontal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

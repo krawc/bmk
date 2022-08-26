@@ -1,4 +1,4 @@
-import * as styles from "./blog-post-preview.module.css";
+import * as styles from "./blog-post-preview-publication.module.css";
 import { buildImageObj, cn, getBlogUrl } from "../lib/helpers";
 import { Link } from "gatsby";
 import PortableText from "./portableText";
@@ -16,7 +16,7 @@ function BlogPostPreview(props) {
     <Link
       className={cn(styles.card, props.isInList ? styles.inList : styles.inGrid)}
       to={getBlogUrl(props.publishedAt, props.slug.current)}
-      style={{marginTop: (rando * 15) + 'vh'}}
+      style={{marginTop: (0.3 * 15) + 'vh'}}
     >
       {/* <div className={styles.leadMediaThumb}> */}
         {props.mainImage && props.mainImage.asset && (
@@ -30,7 +30,7 @@ function BlogPostPreview(props) {
         )}
       {/* </div> */}
       <div className={styles.text}>
-        <h3 className={cn(responsiveTitle3, styles.title)}>{props.title}</h3>
+      <h3 className={cn(responsiveTitle3, styles.title)}>{props.title}</h3>
         {/* {props._rawExcerpt && (
           <div className={styles.excerpt}>
             <PortableText blocks={props._rawExcerpt} />

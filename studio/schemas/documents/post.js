@@ -54,7 +54,13 @@ export default {
       name: "videoLink",
       type: "string",
       title: "Video Link",
-      description: "Embeds automatically",
+      description: "",
+    },
+    {
+      name: "publicationLink",
+      type: "string",
+      title: "Publication Link",
+      description: "",
     },
     {
       name: "categories",

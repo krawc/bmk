@@ -34,7 +34,7 @@ export const query = graphql`
     }
   }
 
-  query IndexPageQuery {
+  query EssaysPageQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       description
@@ -42,18 +42,18 @@ export const query = graphql`
     }
     posts: allSanityPost(
       sort: { fields: [publishedAt], order: DESC }
-      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
+      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null }, categories: {elemMatch: {title: {eq: "Essays"}}} }
     ) {
       edges {
         node {
           id
           publishedAt
-          categories {
-            title
-          }
           mainImage {
             ...SanityImage
             alt
+          }
+          categories {
+            title
           }
           title
           _rawExcerpt
@@ -66,7 +66,7 @@ export const query = graphql`
   }
 `;
 
-const IndexPage = (props) => {
+const EssaysPage = (props) => {
   const { data, errors } = props;
 
   if (errors) {
@@ -90,8 +90,6 @@ const IndexPage = (props) => {
     );
   }
 
-  console.log(postNodes)
-
   return (
     <Layout>
       <SEO
@@ -112,4 +110,4 @@ const IndexPage = (props) => {
   );
 };
 
-export default IndexPage;
+export default EssaysPage;

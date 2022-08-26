@@ -1,7 +1,11 @@
-:root {
-  --font-family-sans: -apple-system, BlinkMacSystemFont, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:thin,light,regular,bold,italic&subset=latin,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:regular,bold,italic&subset=latin,latin-ext');
 
-  --color-black: #202123;
+:root {
+  --font-family-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-monospace: 'Roboto Mono', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --color-black: #000;
   --color-dark-gray: #32373e;
   --color-gray: #697a90;
   --color-light-gray: #b4bcc7;
@@ -17,7 +21,7 @@
   --font-small-line-height: calc(21 / 14); /* 21px */
   --font-base-size: 1em; /* 16px */
   --font-base-line-height: calc(24 / var(--unit)); /* 24px */
-  --font-large-size: calc(18 / var(--unit) * 1rem); /* 18px */
+  --font-large-size: calc(24 / var(--unit) * 1rem); /* 18px */
   --font-large-line-height: calc(27 / 18); /* 27px */
 
   --font-title3-size: calc(21 / var(--unit) * 1rem); /* 21px */

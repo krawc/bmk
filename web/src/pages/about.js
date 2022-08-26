@@ -5,7 +5,7 @@ import {
   filterOutDocsWithoutSlugs,
   mapEdgesToNodes,
 } from "../lib/helpers";
-import BlogPostPreviewGrid from "../components/blog-post-preview-grid";
+import About from "../components/about";
 import Container from "../components/container";
 import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
@@ -34,41 +34,35 @@ export const query = graphql`
     }
   }
 
-  query IndexPageQuery {
+  query AboutPageQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       description
       keywords
     }
-    posts: allSanityPost(
-      sort: { fields: [publishedAt], order: DESC }
-      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
+    posts: allSanityAbout(
+      limit: 1
     ) {
       edges {
         node {
           id
-          publishedAt
-          categories {
-            title
-          }
+          title
           mainImage {
             ...SanityImage
             alt
           }
-          title
-          _rawExcerpt
-          slug {
-            current
-          }
+          description
         }
       }
     }
   }
 `;
 
-const IndexPage = (props) => {
+const AboutPage = (props) => {
   const { data, errors } = props;
 
+  //console.log(data.posts.edges[0].node);
+  
   if (errors) {
     return (
       <Layout>
@@ -80,17 +74,15 @@ const IndexPage = (props) => {
   const site = (data || {}).site;
   const postNodes = (data || {}).posts
     ? mapEdgesToNodes(data.posts)
-        .filter(filterOutDocsWithoutSlugs)
-        .filter(filterOutDocsPublishedInTheFuture)
     : [];
+
+    console.log(postNodes)
 
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
     );
   }
-
-  console.log(postNodes)
 
   return (
     <Layout>
@@ -100,16 +92,20 @@ const IndexPage = (props) => {
         keywords={site.keywords}
       />
       <Container>
-        {postNodes && (
-          <BlogPostPreviewGrid
-            title="Latest blog posts"
-            nodes={postNodes}
-            browseMoreHref="/archive/"
-          />
-        )}
+        {postNodes && postNodes.map((item) => {
+          console.log(item)
+          return (
+            <About
+              description={item.description}
+              title={item.title}
+              mainImage={item.mainImage}
+            />
+            )
+          })
+        }
       </Container>
     </Layout>
   );
 };
 
-export default IndexPage;
+export default AboutPage;

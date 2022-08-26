@@ -46,6 +46,42 @@ async function createBlogPostPages(graphql, actions) {
     });
 }
 
+async function createAboutPage(graphql, actions) {
+  const { createPage } = actions;
+  const result = await graphql(`
+    {
+      allSanityAbout(
+        limit: 1
+      ) {
+        edges {
+          node {
+            id
+            title
+            description
+          }
+        }
+      }
+    }
+  `);
+
+  if (result.errors) throw result.errors;
+
+  const postEdges = (result.data.allSanityAbout || {}).edges || [];
+
+  postEdges.length !== 0 && postEdges
+    .forEach((edge) => {
+      const { id, slug = {}, publishedAt } = edge.node;
+      const path = `/about`;
+
+      createPage({
+        path,
+        component: require.resolve("./src/templates/about.js"),
+        context: { id },
+      });
+    });
+}
+
 exports.createPages = async ({ graphql, actions }) => {
   await createBlogPostPages(graphql, actions);
+  // await createAboutPage(graphql, actions);
 };

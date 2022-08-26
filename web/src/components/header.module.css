@@ -1,9 +1,25 @@
 @import '../styles/custom-media.css';
 @import '../styles/custom-properties.css';
 
+
+
+
 .root {
   position: relative;
   z-index: 100;
+  @nest & .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+    & .bm-burger-bars {
+      background: #fff;
+    }
+  }
+  
+  /* Color/shape of burger icon bars */
+
 }
 
 .wrapper {
@@ -13,21 +29,37 @@
   padding: 1em;
   display: flex;
 
-  @media (--media-min-small) {
+  @media (max-width: 768px) {
     padding: 1.5em 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.icon {
+  height: 32px;
+  @nest & svg {
+height: 32px;
+width: 32px;
   }
 }
 
 .branding {
   font-weight: 600;
-  flex: 1;
-
+  flex: 0 0 200px;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-family: var(--font-family-monospace);
   @nest & a {
     display: inline-block;
     padding: 0.5em;
     color: inherit;
     text-decoration: none;
-
+    @media (max-width: 768px) {
+      padding: 0;
+    }
     @media (hover: hover) {
       @nest &:hover {
         color: var(--color-accent);
@@ -57,58 +89,42 @@
 }
 
 .nav {
-  display: none;
-
+  flex: 1;
   @nest & ul {
-    margin: 0;
-    padding: 0;
-  }
-
-  @nest & ul li a {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  @media (hover: hover) {
-    @nest & ul li a:hover {
-      color: var(--color-accent);
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5em;
+    & a {
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    & a.active {
+      font-weight: 700;
     }
   }
-
-  @media (--media-max-small) {
-    position: absolute;
-    background: var(--color-white);
-    color: var(--color-black);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    left: 0;
-    right: 0;
-    top: 4.3rem;
-
-    @nest & ul {
-      padding: 1rem 0;
-    }
-
-    @nest & ul li a {
-      padding: 0.5rem 1.5rem;
-    }
-  }
-
-  @media (--media-min-small) {
-    display: block;
-
-    @nest & ul {
-      list-style: none;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    @nest & ul li a {
-      padding: 0.5rem;
-    }
+  & a.active {
+    font-weight: 700;
   }
 }
 
 .showNav {
   display: block;
+}
+
+.menuContainer {
+  position: relative;
+  height: 32px;
+}
+
+.mobMenu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  padding: 1em 1.5em;
+  background: #111;
+  line-height: 2;
+  text-decoration: none;
 }
