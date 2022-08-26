@@ -6,6 +6,7 @@ import { cn } from "../lib/helpers";
 import * as styles from "./header.module.css";
 
 import { useState, useEffect } from 'react';
+import window from 'global'
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
