@@ -48,6 +48,7 @@ export const query = graphql`
         node {
           id
           publishedAt
+          videoLink
           categories {
             title
           }

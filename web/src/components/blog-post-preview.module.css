@@ -37,6 +37,11 @@
 
   }
 
+  @media (max-width: 768px) {
+    margin-top: 10vh!important;
+    width: 90vw!important;
+  }
+
   margin: 0 0 0 15vh;
   font-family: var(--font-family-monospace);
   font-weight: 100;
