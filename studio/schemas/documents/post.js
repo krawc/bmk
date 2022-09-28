@@ -57,6 +57,12 @@ export default {
       description: "",
     },
     {
+      name: "embedLink",
+      type: "string",
+      title: "Embed Link",
+      description: "",
+    },
+    {
       name: "publicationLink",
       type: "string",
       title: "Publication Link",

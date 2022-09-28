@@ -16,6 +16,7 @@ function BlogPost(props) {
     mainImage,
     publishedAt,
   } = props;
+  
   return (
     <article className={styles.root}>
       <Container>
