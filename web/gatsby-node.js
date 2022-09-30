@@ -70,13 +70,13 @@ async function createThemePages(graphql, actions) {
 
   themeEdges.length !== 0 && themeEdges
     .forEach((edge) => {
-      const { id } = edge.node;
+      const { id, title } = edge.node;
       const path = `/theme/${id}/`;
 
       createPage({
         path,
         component: require.resolve("./src/pages/theme.js"),
-        context: { id },
+        context: { id, title },
       });
     });
 }

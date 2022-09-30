@@ -88,6 +88,8 @@ function BlogPostPreviewTheme(props) {
     setW(num);
   };
 
+  console.log(props)
+
   // graph payload (with minimalist structure)
 
 

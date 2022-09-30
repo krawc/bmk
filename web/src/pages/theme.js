@@ -50,6 +50,8 @@ const ThemePage = (props) => {
     );
   }
 
+  console.log(props)
+
   const postNodes = data && data.posts && mapEdgesToNodes(data.posts);
 
   return (
