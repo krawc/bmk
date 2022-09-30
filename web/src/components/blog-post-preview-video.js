@@ -33,7 +33,7 @@ function BlogPostPreview(props) {
   const [rando, setRando] = React.useState(Math.random())
   const [open, setOpen] = React.useState(false)
 
-  console.log(props.videoLink)
+  console.log(props)
   return (
     <>
       <Modal
@@ -41,7 +41,7 @@ function BlogPostPreview(props) {
         onRequestClose={() => setOpen(false)}
         style={customStyles}
         contentLabel="Example Modal">
-          <ReactPlayer controls={true} url={props.videoLink}></ReactPlayer>
+          {props.embedLink ? <div dangerouslySetInnerHTML={{ __html: props.embedLink }} /> : <ReactPlayer controls={true} url={props.videoLink}></ReactPlayer>}
       </Modal>
     <div
       className={cn(styles.card, props.isInList ? styles.inList : styles.inGrid)}
