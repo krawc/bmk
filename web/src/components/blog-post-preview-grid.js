@@ -58,26 +58,7 @@ function BlogPostPreviewGrid(props) {
     <div className={styles.root}> 
 
 
-      {width > 768 ? 
-        <HorizontalScroll style={{height: 'calc(100vh - 73px)'}} handleScroll={handleScroll} handleWidth={handleWidth}>
-        {props.nodes &&
-          props.nodes.map((node) => {
-            if (node.categories && node.categories.length !== 0 && node.categories[0].title === 'Videos') {
-              return(
-                <BlogPostPreviewVideo {...node} />
-              )
-            }
-            if (node.categories && node.categories.length !== 0 && node.categories[0].title === 'Publications') {
-              return(
-                <BlogPostPreviewPublication {...node} />
-              )
-            }
-            return(
-            <BlogPostPreview {...node} />
-            )
-          })}
-        </HorizontalScroll>
-        :
+      {width < 768 ? 
         <Carousel
         additionalTransfrom={0}
         arrows
@@ -142,6 +123,25 @@ function BlogPostPreviewGrid(props) {
               )
             })}
       </Carousel>
+      :
+      <HorizontalScroll style={{height: 'calc(100vh - 73px)'}} handleScroll={handleScroll} handleWidth={handleWidth}>
+      {props.nodes &&
+        props.nodes.map((node) => {
+          if (node.categories && node.categories.length !== 0 && node.categories[0].title === 'Videos') {
+            return(
+              <BlogPostPreviewVideo {...node} />
+            )
+          }
+          if (node.categories && node.categories.length !== 0 && node.categories[0].title === 'Publications') {
+            return(
+              <BlogPostPreviewPublication {...node} />
+            )
+          }
+          return(
+          <BlogPostPreview {...node} />
+          )
+        })}
+      </HorizontalScroll>
       }
 
 

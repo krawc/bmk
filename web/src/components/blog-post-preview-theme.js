@@ -123,16 +123,15 @@ const data = {
 const myConfig = {
   automaticRearrangeAfterDropNode: false,
   collapsible: false,
-  height: 400,
+  height: 600,
   highlightDegree: 1,
   highlightOpacity: 0.2,
-  linkHighlightBehavior: true,
-  maxZoom: 8,
-  minZoom: 0.1,
-  nodeHighlightBehavior: false,
+  linkHighlightBehavior: false,
   panAndZoom: false,
   staticGraph: false,
   width: 1200,
+  maxZoom: 1,
+  minZoom: 1,
   node: {
     color: "lightgreen",
     size: {
@@ -159,7 +158,7 @@ const myConfig = {
     viewGenerator: node => <CustomNode {...node} />,
   },
   d3: {
-    linkLength: 300,
+    linkLength: 350,
   },
   link: {
     highlightColor: "white",
@@ -195,6 +194,7 @@ const myConfig = {
         // </HorizontalScroll>
         // <GraphCanvas nodes={props.nodes}/>
         <Graph
+        style={{padding: '20px 0', minHeight: '100vh'}}
           id="graph-id" // id is mandatory
           data={data}
           config={myConfig}

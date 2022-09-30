@@ -48,7 +48,7 @@
   position: relative;
   display: inline-block;
   white-space: pre-wrap;
-  width: 40vw;
+  width: 30vw;
 }
 
 .inGrid {
@@ -59,7 +59,9 @@
   max-height: 40vh;
   opacity: 0.8;
   transition: opacity 0.2s ease-in-out;
-  width: 100%;
+  width: 80%;
+  object-fit: cover;
+
   &:hover {
     opacity: 1;
   }
