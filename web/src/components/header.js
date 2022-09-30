@@ -80,8 +80,14 @@ const Header = (props) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      zIndex: 9999
     }
   }
+
+
+  const links = themeNodes && themeNodes.map((item) => {
+    return <Link onClick={() => setThemes(!themes)} to={`/theme/${item.id}`} activeStyle={{fontWeight: 700}}>{item.title}</Link>
+  })
 
   if (width <= 768) {
     return (
@@ -91,6 +97,17 @@ const Header = (props) => {
           <Link to="/">{props.siteTitle}</Link>
         </div>
          <div className={styles.menuContainer}>
+            <Modal
+              isOpen={themes}
+              style={customStyles}
+              className="themesModalll"
+              onRequestClose={() => setThemes(false)}
+              contentLabel="Example Modal">
+                <h2>THEMES</h2>
+                <div style={{fontFamily: 'Roboto Mono', fontSize: 28, display: 'flex', flexDirection: 'column'}}>
+                  {links}
+                </div>
+            </Modal>
           <div className={styles.icon} onClick={() => { console.log(isOpen); setIsOpen(!isOpen)}}>
           <Icon symbol="hamburger"/>
           </div>
@@ -99,16 +116,13 @@ const Header = (props) => {
               <Link to="/" activeStyle={{fontWeight: 700}}>Works</Link>
               <Link to="/about/" activeStyle={{fontWeight: 700}}>About</Link>
               <Link to="/contact/" activeStyle={{fontWeight: 700}}>Contact</Link>
-            </div>}
+              <div onClick={() => {setThemes(!themes)}} activeStyle={{fontWeight: 700}}>THEMES</div>
+          </div>}
         </div>
       </div>
     </div>
     )
   }
-
-  const links = themeNodes && themeNodes.map((item) => {
-      return <Link onClick={() => setThemes(!themes)} to={`/theme/${item.id}`} activeStyle={{fontWeight: 700}}>{item.title}</Link>
-    })
 
   return (
     <div className={styles.root}>
