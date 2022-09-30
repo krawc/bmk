@@ -55,6 +55,9 @@
   position: fixed;
   top: 0px;
   left: 0px;
+  @media (--media-min-small) {
+    display: none;
+  }
 }
 
 .grid {

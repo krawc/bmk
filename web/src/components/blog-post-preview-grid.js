@@ -163,10 +163,10 @@ function BlogPostPreviewGrid(props) {
       }
 
 
-      <div onMouseDown={scrollMouseDown} onMouseUp={scrollMouseUp} className={styles.scrollBar}>
+      {width < 768 ? <></> : <div onMouseDown={scrollMouseDown} onMouseUp={scrollMouseUp} className={styles.scrollBar}>
         <div className={styles.wheel} style={{left: 'calc(' + ((Math.abs(scroll) / w) * 90) + '% + 5%)'}}></div>
-      </div>
-      <div className={styles.overlay}></div>
+      </div>}
+      {width < 768 ? <></> : <div className={styles.overlay}></div>}
         <ul className={styles.subMenu}>
           <li>
             <Link to="/" activeStyle={{opacity: 1}}>ALL</Link>

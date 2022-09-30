@@ -41,6 +41,7 @@
   @media (max-width: 768px) {
     margin-top: 10vh!important;
     width: 90vw!important;
+margin-left: 5vw!important;
   }
   
 
@@ -63,6 +64,9 @@
   z-index: 10;
   position: relative;
   object-fit: cover;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
   &:hover {
     opacity: 1;
   }
