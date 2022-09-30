@@ -15,8 +15,11 @@ function BlogPost(props) {
     title,
     mainImage,
     publishedAt,
+    embedLink
   } = props;
   
+
+  console.log(embedLink)
   return (
     <article className={styles.root}>
       <Container>
@@ -51,6 +54,7 @@ function BlogPost(props) {
                 alt={mainImage.alt}
               />
           )}
+          {embedLink && <div dangerouslySetInnerHTML={{ __html: embedLink }} />}
             {_rawBody && <PortableText blocks={_rawBody} />}
           </div>
         </div>

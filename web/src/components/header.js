@@ -1,12 +1,27 @@
-import { Link } from "gatsby";
+import { Link, graphql, useStaticQuery } from "gatsby";
 import React from "react";
 import Icon from "./icon";
-import { cn } from "../lib/helpers";
+import { cn, mapEdgesToNodes} from "../lib/helpers";
+import Modal from 'react-modal';
 
 import * as styles from "./header.module.css";
 
 import { useState, useEffect } from 'react';
 import window from 'global'
+
+export const query = graphql`
+  query ThemesQuery {
+    themes: allSanityTheme {
+      edges {
+        node {
+          id
+          title
+          description
+        }
+      }
+    }
+  }
+`
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -33,18 +48,47 @@ function useWindowDimensions() {
 
 
 
-const Header = ({ onHideNav, onShowNav, showNav, siteTitle }) => {
+const Header = (props) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [themes, setThemes] = React.useState(false)
+
+  const  data = useStaticQuery(query);
+
   const { height, width } = useWindowDimensions();
+
+
+
+  const themeNodes = (data || {}).themes
+  ? mapEdgesToNodes(data.themes)
+  : [];
+
+  console.log(data.themes)
+
+  const customStyles = {
+    content: {
+      padding: 20,
+       textAlign: 'center'
+    },
+    overlay: {
+      background: 'rgba(0,0,0,0.3)', 
+      width: '100%',
+      height: '100%',
+      margin: 'auto',
+      backdropFilter: 'blur(30px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }
+  }
 
   if (width <= 768) {
     return (
       <div className={styles.root}>
       <div className={styles.wrapper}>
         <div className={styles.branding}>
-          <Link to="/">{siteTitle}</Link>
+          <Link to="/">{props.siteTitle}</Link>
         </div>
          <div className={styles.menuContainer}>
           <div className={styles.icon} onClick={() => { console.log(isOpen); setIsOpen(!isOpen)}}>
@@ -62,11 +106,15 @@ const Header = ({ onHideNav, onShowNav, showNav, siteTitle }) => {
     )
   }
 
+  const links = themeNodes && themeNodes.map((item) => {
+      return <Link onClick={() => setThemes(!themes)} to={`/theme/${item.id}`} activeStyle={{fontWeight: 700}}>{item.title}</Link>
+    })
+
   return (
     <div className={styles.root}>
     <div className={styles.wrapper}>
       <div className={styles.branding}>
-        <Link to="/">{siteTitle}</Link>
+        <Link to="/">{props.siteTitle}</Link>
       </div>
       {
 
@@ -84,6 +132,20 @@ const Header = ({ onHideNav, onShowNav, showNav, siteTitle }) => {
           </li>
         </ul>
       </nav>
+      <div className={styles.themes}>
+        <button type="button" onClick={() => {setThemes(!themes)}}><svg fill="#fff" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="20px" height="20px"><path d="M 3 7 A 1.0001 1.0001 0 1 0 3 9 L 27 9 A 1.0001 1.0001 0 1 0 27 7 L 3 7 z M 3 14 A 1.0001 1.0001 0 1 0 3 16 L 27 16 A 1.0001 1.0001 0 1 0 27 14 L 3 14 z M 3 21 A 1.0001 1.0001 0 1 0 3 23 L 27 23 A 1.0001 1.0001 0 1 0 27 21 L 3 21 z"/></svg>THEMES</button>
+        <Modal
+          isOpen={themes}
+          style={customStyles}
+          className="themesModalll"
+          onRequestClose={() => setThemes(false)}
+          contentLabel="Example Modal">
+            <h2>THEMES</h2>
+            <div style={{fontFamily: 'Roboto Mono', fontSize: 28, display: 'flex', flexDirection: 'column'}}>
+              {links}
+            </div>
+        </Modal>
+      </div>
     </div>
   </div>
   )

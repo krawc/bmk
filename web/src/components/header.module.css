@@ -128,3 +128,28 @@ width: 32px;
   line-height: 2;
   text-decoration: none;
 }
+
+.themes {
+  display: flex;
+  align-items: flex-start;
+  flex: 0 0 200px;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  @nest & button {
+    background: transparent;
+    border: 0;
+    font-size: 18px;
+    font-family: 'Montserrat';
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: flex;
+    cursor: pointer;
+    & svg {
+      margin-right: 7px;
+      margin-top: -2px;
+      width: 25px;
+      height: 25px;
+    }
+  }
+}

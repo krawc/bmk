@@ -49,6 +49,7 @@ export const query = graphql`
           id
           publishedAt
           videoLink
+          embedLink
           mainImage {
             ...SanityImage
             alt

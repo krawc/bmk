@@ -24,6 +24,7 @@ export const query = graphql`
       slug {
         current
       }
+      embedLink
       _rawExcerpt(resolveReferences: { maxDepth: 5 })
       _rawBody(resolveReferences: { maxDepth: 5 })
       authors {

@@ -46,13 +46,11 @@ async function createBlogPostPages(graphql, actions) {
     });
 }
 
-async function createAboutPage(graphql, actions) {
+async function createThemePages(graphql, actions) {
   const { createPage } = actions;
   const result = await graphql(`
     {
-      allSanityAbout(
-        limit: 1
-      ) {
+      allSanityTheme {
         edges {
           node {
             id
@@ -66,16 +64,18 @@ async function createAboutPage(graphql, actions) {
 
   if (result.errors) throw result.errors;
 
-  const postEdges = (result.data.allSanityAbout || {}).edges || [];
+  const themeEdges = (result.data.allSanityTheme || {}).edges || [];
 
-  postEdges.length !== 0 && postEdges
+  console.log(themeEdges)
+
+  themeEdges.length !== 0 && themeEdges
     .forEach((edge) => {
-      const { id, slug = {}, publishedAt } = edge.node;
-      const path = `/about`;
+      const { id } = edge.node;
+      const path = `/theme/${id}/`;
 
       createPage({
         path,
-        component: require.resolve("./src/templates/about.js"),
+        component: require.resolve("./src/pages/theme.js"),
         context: { id },
       });
     });
@@ -83,5 +83,5 @@ async function createAboutPage(graphql, actions) {
 
 exports.createPages = async ({ graphql, actions }) => {
   await createBlogPostPages(graphql, actions);
-  // await createAboutPage(graphql, actions);
+  await createThemePages(graphql, actions);
 };

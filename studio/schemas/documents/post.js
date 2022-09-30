@@ -82,6 +82,19 @@ export default {
       ],
     },
     {
+      name: "themes",
+      type: "array",
+      title: "Themes",
+      of: [
+        {
+          type: "reference",
+          to: {
+            type: "theme",
+          },
+        },
+      ],
+    },
+    {
       name: "body",
       type: "bodyPortableText",
       title: "Body",

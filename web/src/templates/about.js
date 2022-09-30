@@ -1,4 +1,3 @@
-import { graphql } from "gatsby";
 import About from "../components/about";
 import React from "react";
 import GraphQLErrorList from "../components/graphql-error-list";
@@ -7,19 +6,7 @@ import Container from "../components/container";
 import SEO from "../components/seo";
 import { toPlainText } from "../lib/helpers";
 
-export const query = graphql`
-  query AboutTemplateQuery($id: String!) {
-    post: sanityAbout(id: { eq: $id }) {
-      id
-      mainImage {
-        ...SanityImage
-        alt
-      }
-      title
-      description
-    }
-  }
-`;
+
 
 const AboutTemplate = (props) => {
   const { data, errors } = props;
@@ -40,8 +27,7 @@ const AboutTemplate = (props) => {
           <GraphQLErrorList errors={errors} />
         </Container>
       )}
-
-      {post && <About {...post} />}
+      <h1>ekjrkr</h1>
     </Layout>
   );
 };
