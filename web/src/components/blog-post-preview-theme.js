@@ -123,7 +123,7 @@ const data = {
 const myConfig = {
   automaticRearrangeAfterDropNode: false,
   collapsible: false,
-  height: 600,
+  height: 400,
   highlightDegree: 1,
   highlightOpacity: 0.2,
   linkHighlightBehavior: true,
@@ -132,7 +132,7 @@ const myConfig = {
   nodeHighlightBehavior: false,
   panAndZoom: false,
   staticGraph: false,
-  width: 1000,
+  width: 1200,
   node: {
     color: "lightgreen",
     size: {

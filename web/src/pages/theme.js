@@ -10,7 +10,7 @@ import { mapEdgesToNodes } from "../lib/helpers";
 import { responsiveTitle1 } from "../components/typography.module.css";
 
 export const query = graphql`
-  query ThemePageQuery($id: String!) {
+  query ThemePageQuery($id: String) {
     posts: allSanityPost(
       sort: { fields: [publishedAt], order: DESC }
       filter: { themes: {elemMatch: { id: { eq: $id } } }, publishedAt: { ne: null } }
