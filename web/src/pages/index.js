@@ -95,13 +95,13 @@ const IndexPage = (props) => {
   console.log(postNodes)
 
   return (
-    <Layout>
+    <Layout hideOverflow>
       <SEO
         title={site.title}
         description={site.description}
         keywords={site.keywords}
       />
-      <Container>
+      <Container style={{maxHeight: '90vh'}}>
         {postNodes && (
           <BlogPostPreviewGrid
             title="Latest blog posts"

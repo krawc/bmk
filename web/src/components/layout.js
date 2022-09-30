@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import "../styles/layout.css";
 import * as styles from "./layout.module.css";
 
-const Layout = ({ children, onHideNav, onShowNav, showNav, siteTitle }) => (
-  <>
+const Layout = ({ children, onHideNav, onShowNav, showNav, siteTitle, hideOverflow }) => (
+  <div style={{overflow: hideOverflow ? 'hidden' : ''}}>
     <Header
       siteTitle={siteTitle}
       onHideNav={onHideNav}
@@ -36,7 +36,7 @@ const Layout = ({ children, onHideNav, onShowNav, showNav, siteTitle }) => (
         </div>
       </div>
     </footer> */}
-  </>
+  </div>
 );
 
 export default Layout;

@@ -54,6 +54,24 @@ function BlogPostPreviewGrid(props) {
     setW(num);
   };
 
+  const scrollMouseDown = (e) =>  {
+    handleScroll((-e.pageX * (w / width)) - 20);
+      e.target.addEventListener('mousemove',move)
+      // console.log(-e.pageX * (w / width))
+  }
+
+  const scrollMouseUp = (e) =>  {
+      e.target.removeEventListener('mousemove',move)
+      // console.log(-e.pageX * (w / width))
+  }
+
+  const move=e=>
+  {
+    handleScroll((-e.pageX * (w / width)) - 20);
+  }
+
+  console.log(scroll, w)
+
   return (
     <div className={styles.root}> 
 
@@ -124,7 +142,7 @@ function BlogPostPreviewGrid(props) {
             })}
       </Carousel>
       :
-      <HorizontalScroll style={{height: 'calc(100vh - 73px)'}} handleScroll={handleScroll} handleWidth={handleWidth}>
+      <HorizontalScroll animValues={scroll} style={{height: 'calc(100vh - 73px)'}} handleScroll={handleScroll} handleWidth={handleWidth}>
       {props.nodes &&
         props.nodes.map((node) => {
           if (node.categories && node.categories.length !== 0 && node.categories[0].title === 'Videos') {
@@ -145,7 +163,7 @@ function BlogPostPreviewGrid(props) {
       }
 
 
-      <div className={styles.scrollBar}>
+      <div onMouseDown={scrollMouseDown} onMouseUp={scrollMouseUp} className={styles.scrollBar}>
         <div className={styles.wheel} style={{left: 'calc(' + ((Math.abs(scroll) / w) * 90) + '% + 5%)'}}></div>
       </div>
       <div className={styles.overlay}></div>

@@ -96,7 +96,8 @@
   transform: translateX(40px);
   margin-top: 1em!important;
   max-width: 400px;
-  
+  max-height: 50vh;
+
   &::before {
     content: "";
     position: absolute;

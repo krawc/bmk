@@ -26,6 +26,8 @@
   height: 1px;
   position: fixed;
   bottom: 20px;
+  padding: 10px 0;
+  z-index: 999;
 }
 
 .wheel {
@@ -34,7 +36,7 @@
   height: 20px;
   border-radius: 50%;
   border: 1px solid #fff;
-  top: -11px;
+  top: 9px;
   &::after {
     content: "";
     position: absolute;
