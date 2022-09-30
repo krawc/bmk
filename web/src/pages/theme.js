@@ -58,7 +58,7 @@ const ThemePage = (props) => {
     <Layout>
       <SEO title="Archive" />
       <Container>
-        <h1 className={responsiveTitle1}>Category: {props.id}</h1>
+        <h1 style={{maxWidth: 900, margin: 'auto', fontFamily: 'Roboto Mono, monospace'}} className={responsiveTitle1}>Theme: {props.pageContext.title}</h1>
         {postNodes && postNodes.length > 0 && (
           <BlogPostPreviewTheme nodes={postNodes} />
         )}
